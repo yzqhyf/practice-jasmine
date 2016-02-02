@@ -1,31 +1,12 @@
-(function() {
-    var Notes = function() {
-        var notes = [];
-        this.add = function(note) {
-            notes.push(note);
-        }
-    }
-
-    //add an object that implements Notes interface is used in a service to add notes eg:
-
-    var NotesService = function(notes) {
-
-        function writeNote(msg) {
-            notes.add(msg);
-        }
-
-        return {
-            writeNote: writeNote
-        }
-    }
+(function(window) {
 
     //complete the unit test to verify that Notes.add has been invoked to add notes
     describe('Notes Service', function() {
         var notesService, notes;
 
         beforeEach(function() {
-            notes = new Notes();
-            notesService = new NotesService(notes);
+            notes = new window.main.Notes();
+            notesService = new window.main.NotesService(notes);
         })
 
         it('should use Noets API to add notes', function() {
@@ -43,4 +24,4 @@
             expect(called).toEqual(true);
         });
     });
-})();
+})(this);
