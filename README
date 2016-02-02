@@ -1,4 +1,4 @@
 # run test on page
 
 * node app.js
-* visit test.html on browser with http://localhost:8090/test.html
+* visit jasmine.html on browser with http://localhost:8090/public/jasmine.html
