@@ -2,6 +2,6 @@
 
 
 * npm install grunt-cli -g
-* npm install grunt-contribute-jasmine --save-dev
+* npm install grunt-contrib-jasmine --save-dev
 * node app.js
 * visit jasmine.html on browser with http://localhost:8090/public/jasmine.html
