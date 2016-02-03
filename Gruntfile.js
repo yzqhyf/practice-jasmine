@@ -5,7 +5,11 @@ module.exports = function(grunt) {
                 src: 'public/*.js',
                 options: {
                     specs: 'spec/*Spec.js',
-                    helpers: 'spec/*Helper.js'
+                    helpers: 'spec/*Helper.js',
+                    vendor: [
+                        'public/libs/angular/angular.js',
+                        'public/libs/angular-mocks/angular-mocks.js'
+                    ]
                 }
             }
         }

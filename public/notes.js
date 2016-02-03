@@ -29,5 +29,4 @@
         Notes: Notes,
         NotesService: NotesService
     });
-    console.log(window.main)
 })(this);

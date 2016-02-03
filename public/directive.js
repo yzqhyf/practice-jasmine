@@ -1,0 +1,43 @@
+(function(window) {
+
+    'use strict';
+    window.angular.module('check', [])
+        .directive('checkDirective', function($interval, $http){
+            // we use this directive to check the health of our web site
+            // the url will be /health, and this value can be configed
+            // we only keep the last number of msg, e.g., we can only keep 5
+            return {
+                template: '<li ng-repeat="msg in msgs">{{msg.status}}: {{msg.time | date:"HH:mm:ss a"}}</li>',
+                scope: {
+                    url: '@',
+                    interval: '@',
+                    number: '@'
+                },
+                link: function(scope, element, attrs){
+                    console.log('interval', scope.interval);
+                    scope.interval = 10;
+                    console.log('interval', scope.interval);
+                    scope.number = parseInt(scope.number) || 5;
+                    scope.url = scope.url || '/check';
+                    scope.msgs = [];
+
+                    var updateMsg = function(status){
+                        return function(){
+                            // TODO, we didn't verify the number
+                            // this point can trigger a fail in our test.
+                            scope.msgs.push({
+                                status: status ? 'OK' : 'Not Found'
+                            })
+                        };
+                    }
+                    $interval(function(){
+                        console.log('req');
+                        $http.get(scope.url).success(function(){
+                            console.log('resp');
+                            return updateMsg(1)
+                        }).error(updateMsg(0));
+                    }, scope.interval);
+                }
+            };   
+        });
+})(this);
