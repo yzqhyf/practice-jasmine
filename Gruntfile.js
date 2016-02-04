@@ -9,12 +9,17 @@ module.exports = function(grunt) {
                     vendor: [
                         'public/libs/angular/angular.js',
                         'public/libs/angular-mocks/angular-mocks.js'
-                    ]
+                    ],
+                    junit: {path: 'report.xml'}
                 }
             }
+        },
+        jshint: {
+            files: ['Gruntfile.js', 'public/*.js', 'spec/*.js']
         }
     });
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.registerTask('default', ['jasmine']);
-}
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.registerTask('default', ['jshint', 'jasmine']);
+};
 

@@ -14,29 +14,29 @@
                     number: '@'
                 },
                 link: function(scope, element, attrs){
-                    console.log('interval', scope.interval);
-                    scope.interval = 10;
-                    console.log('interval', scope.interval);
-                    scope.number = parseInt(scope.number) || 5;
-                    scope.url = scope.url || '/check';
+                    scope.opts = {
+                        interval: parseInt(scope.interval || 10),
+                        number: parseInt(scope.number || 5),
+                        url: scope.url || '/check'
+                    };                    
                     scope.msgs = [];
 
                     var updateMsg = function(status){
                         return function(){
                             // TODO, we didn't verify the number
                             // this point can trigger a fail in our test.
+                            if(scope.msgs.length >= 5) {
+                                scope.msgs.shift();
+                            }
                             scope.msgs.push({
                                 status: status ? 'OK' : 'Not Found'
-                            })
+                            });
                         };
-                    }
-                    $interval(function(){
-                        console.log('req');
-                        $http.get(scope.url).success(function(){
-                            console.log('resp');
-                            return updateMsg(1)
-                        }).error(updateMsg(0));
-                    }, scope.interval);
+                    };
+                    $interval(function() {
+                        // console.log('interval', scope.opts.interval);
+                        $http.get(scope.opts.url).success(updateMsg(1)).error(updateMsg(0));
+                    }, scope.opts.interval);
                 }
             };   
         });

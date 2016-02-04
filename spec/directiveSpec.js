@@ -8,23 +8,40 @@ describe('verify check directive', function() {
         $http = _$http_;
         $interval = _$interval_;
         $httpBackend = _$httpBackend_;
+        $httpBackend.whenGET('/check').respond({});
     }));
 
     it('check init params', function() {
-        var cnt = '<check-directive url="/check" number="3" interval="10"></check-directive>';
+        var cnt = '<check-directive url="/check" number="3" interval="1000"></check-directive>';
         var element = $compile(cnt)($rootScope);
         $rootScope.$digest();
         scope = element.isolateScope();
-        expect('/check').toEqual(scope.url);
-        expect('3').toEqual(scope.number);
-        expect('10').toEqual(scope.interval);
+        expect(scope.opts).toEqual({
+            number:3,
+            interval:1000,
+            url:'/check'
+        });
     });
 
-    it('check empty params', function(){
+    it('check interval and http', function() {
         var element = $compile('<check-directive></check-directive>')($rootScope);
-        scope = element.ioslateScope();
-        expect(scope.url).not.toBeDefined();
-        expect(scope.number).not.toBeDefined();
-        expect(scope.interval).not.toBeDefined();
+        scope = element.isolateScope();
+        $rootScope.$digest();
+        expect(scope.msgs.length).toEqual(0);
+
+        $interval.flush(10);
+        $httpBackend.flush();
+        expect(scope.msgs.length).toEqual(1);
     });
-})
+
+    it('check interval and http', function() {
+        var element = $compile('<check-directive></check-directive>')($rootScope);
+        scope = element.isolateScope();
+        $rootScope.$digest();
+        expect(scope.msgs.length).toEqual(0);
+
+        $interval.flush(60);
+        $httpBackend.flush();
+        expect(scope.msgs.length).toEqual(5);
+    });
+});

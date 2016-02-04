@@ -3,8 +3,8 @@
         var notes = [];
         this.add = function(note) {
             notes.push(note);
-        }
-    }
+        };
+    };
 
     //add an object that implements Notes interface is used in a service to add notes eg:
 
@@ -16,15 +16,15 @@
 
         return {
             writeNote: writeNote
-        }
-    }
+        };
+    };
 
     var ext = function(obj, extObj) {
         for (var k in extObj) {
             obj[k] = extObj[k];
         }
-        return obj
-    }
+        return obj;
+    };
     window.main = ext(window.main || {}, {
         Notes: Notes,
         NotesService: NotesService

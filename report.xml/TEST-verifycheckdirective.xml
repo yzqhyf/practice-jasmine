@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="verify check directive" errors="0" tests="3" failures="0" time="0.054" timestamp="Thu Feb 04 2016 10:25:14 GMT-0500 (EST)">
+    
+      <testcase assertions="0" classname="verify check directive" name="check init params" time="0.031">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="verify check directive" name="check interval and http" time="0.012">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="verify check directive" name="check interval and http" time="0.01">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

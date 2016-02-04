@@ -7,9 +7,9 @@
         beforeEach(function() {
             notes = new window.main.Notes();
             notesService = new window.main.NotesService(notes);
-        })
+        });
 
-        it('should use Noets API to add notes', function() {
+        it('should use Notes API to add notes', function() {
             // decorator, make sure the raw function is called as well.
             var add = notes.add;
             var called = false;
@@ -19,8 +19,8 @@
             notes.add = function(msg) {
                 called = true;
                 add.call(notes, msg);
-            }
-            notesService.writeNote('a')
+            };
+            notesService.writeNote('a');
             expect(called).toEqual(true);
         });
     });

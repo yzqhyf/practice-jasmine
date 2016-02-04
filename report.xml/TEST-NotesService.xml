@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="Notes Service" errors="0" tests="1" failures="0" time="0.001" timestamp="Thu Feb 04 2016 10:25:14 GMT-0500 (EST)">
+    
+      <testcase assertions="0" classname="Notes Service" name="should use Notes API to add notes" time="0.001">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>
